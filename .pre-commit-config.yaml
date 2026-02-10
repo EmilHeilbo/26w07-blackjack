@@ -1,0 +1,15 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff
+        entry: ruff check .
+        language: system
+      - id: pytest
+        name: pytest
+        entry: coverage run -m pytest
+        language: system
+      - id: coverage
+        name: coverage
+        entry: coverage report -m
+        language: system
