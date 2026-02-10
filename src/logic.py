@@ -46,12 +46,8 @@ class card:
 
 
 def get_deck(number_of_decks: int = 1, shuffle_deck: bool = True) -> list[card]:
-  deck: list[card] = []
-  for s in card.Suit:
-    for n in card.Rank:
-      deck.append(card(s, n))
-  for _ in range(1, number_of_decks):
-    deck += deck[:52]
+  BASE_DECK = [card(s, r) for s in card.Suit for r in card.Rank]
+  DECK = BASE_DECK * max(1, number_of_decks)
   if shuffle_deck:
-    shuffle(deck)
-  return deck
+    shuffle(DECK)
+  return DECK
