@@ -5,8 +5,8 @@ from random import shuffle
 
 class card:
   # Separate value names from logic, to make future localization easier
-  SET_NAMES = ["Spades", "Hearts", "Clubs", "Diamonds"]
-  CARD_NAMES = [
+  SUIT_NAMES = ["Spades", "Hearts", "Clubs", "Diamonds"]
+  RANK_NAMES = [
     "Ace",
     "Two",
     "Three",
@@ -21,22 +21,22 @@ class card:
     "Queen",
     "King",
   ]
-  Set = Enum("Set", SET_NAMES)
-  Number = Enum("Number", CARD_NAMES)
+  Suit = Enum("Suit", SUIT_NAMES)
+  Rank = Enum("Rank", RANK_NAMES)
 
-  def __init__(self, set: Set = Set(1), number: Number = Number(1)) -> None:
-    self.set = set if type(set) is self.Set else self.Set(set)
-    self.number = number if type(number) is self.Number else self.Number(number)
+  def __init__(self, suit: Suit = Suit(1), rank: Rank = Rank(1)) -> None:
+    self.suit = suit if type(suit) is self.Suit else self.Suit(suit)
+    self.rank = rank if type(rank) is self.Rank else self.Rank(rank)
 
   def __repr__(self) -> str:
-    return "%s(%s,%s)" % (self.__class__, self.number.value, self.set.value)
+    return "%s(%s,%s)" % (self.__class__, self.rank.value, self.suit.value)
 
   def __str__(self) -> str:
-    return "%s of %s" % (self.number.name, self.set.name)
+    return "%s of %s" % (self.rank.name, self.suit.name)
 
   # Implement int conversion to simplify sorting
   def __int__(self) -> int:
-    return self.set.value * 13 + self.number.value
+    return self.suit.value * 13 + self.rank.value
 
   def __lt__(self, other) -> bool:
     return int(self) < int(other)
@@ -47,8 +47,8 @@ class card:
 
 def get_deck(number_of_decks: int = 1, shuffle_deck: bool = True) -> list[card]:
   deck: list[card] = []
-  for s in card.Set:
-    for n in card.Number:
+  for s in card.Suit:
+    for n in card.Rank:
       deck.append(card(s, n))
   for _ in range(1, number_of_decks):
     deck += deck[:52]

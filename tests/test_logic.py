@@ -18,6 +18,6 @@ def test_ensure_shuffle_works():
 
 
 def test_card_functions():
-  ACE_OF_SPADES = card(card.Set(1), card.Number(1))
+  ACE_OF_SPADES = card(card.Suit(1), card.Rank(1))
   assert str(ACE_OF_SPADES) == "Ace of Spades"
   assert repr(ACE_OF_SPADES) == "<class 'src.logic.card'>(1,1)"
