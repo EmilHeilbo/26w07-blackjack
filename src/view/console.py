@@ -1,3 +1,5 @@
+import logging
+
 from src.state import Game_State
 
 
@@ -18,7 +20,7 @@ class ConsoleView(Game_State):
 
       ------------------
     """
-    print(_intro_text)
+    logging.info(_intro_text)
     self.state.deal_cards()
     for p in [self.state.DEALER, *self.state.PLAYERS]:
       p.print_hand()
@@ -29,14 +31,14 @@ class ConsoleView(Game_State):
       match _input:
         case "h":
           self.state.hit(self.state.PLAYERS[0])
-          print(
+          logging.info(
             f"Player hand: {self.state.PLAYERS[0].hand}, score: {self.state.PLAYERS[0].score}"
           )
         case "s":
-          print("Player stands.")
+          logging.info("Player stands.")
           self.state.close()
           self.state.DEALER.print_hand()
           self.state.winning_hands_to_string(self.state.determine_best_hands())
 
         case _:
-          print("Invalid input. Please enter 'h' or 's'.")
+          logging.info("Invalid input. Please enter 'h' or 's'.")

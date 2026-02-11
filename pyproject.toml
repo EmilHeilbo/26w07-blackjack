@@ -9,5 +9,9 @@ dependencies = [
   "pytest>=9.0.2",
 ]
 
+[pytest]
+log_cli = true
+log_cli_level = "DEBUG"
+
 [tool.ruff]
 indent-width = 2

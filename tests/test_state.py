@@ -33,6 +33,10 @@ def test_win_condition():
   ]
   GAME.PLAYERS[0].update_score()
   assert GAME.PLAYERS[0].score == 21
+  assert (
+    GAME.PLAYERS[0].print_hand()
+    == "Player 1 hand: Ace of Spades, Ten of Hearts\nPlayer 1 score: 21"
+  )
   WINNERS = GAME.determine_best_hands()
   assert GAME.PLAYERS[0] in WINNERS
   assert (
@@ -44,7 +48,8 @@ def test_win_condition():
   WINNERS = GAME.determine_best_hands()
   assert GAME.DEALER not in WINNERS
   assert (
-    "Player 1 wins!" == GAME.winning_hands_to_string(WINNERS) or "Push, dealer splits!"
+    "Player 1 wins!" == GAME.winning_hands_to_string(WINNERS)
+    or "Push, Player 1 splits!"
   )
 
 

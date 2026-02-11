@@ -1,3 +1,4 @@
+import logging
 from enum import Enum
 
 import src.view.console as console
@@ -17,7 +18,7 @@ class View:
   def display(self):
     match self.INTERFACE:
       case Interface.CONSOLE:
-        print("Opening console interface...")
+        logging.info("Opening console interface...")
         view = console.ConsoleView(self.state)
         view.run()
         return 0

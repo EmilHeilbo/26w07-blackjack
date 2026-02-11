@@ -1,3 +1,5 @@
+import logging
+
 from src.logic import Card, get_deck
 
 
@@ -12,7 +14,7 @@ def test_correct_deck_size():
 def test_ensure_shuffle_works():
   DECK = get_deck()
   UNSHUFFLED_DECK = get_deck(shuffle_deck=False)
-  print("The top card is the ", DECK[-1])
+  logging.info("The top card is the ", DECK[-1])
   assert DECK != UNSHUFFLED_DECK
   assert sorted(DECK) == UNSHUFFLED_DECK
 
