@@ -1,13 +1,15 @@
 import logging
 from enum import Enum
 
-import src.view.console as console
-from src.state import Game_State
+from ..state import Game_State
+from . import console
 
 Interface = Enum("Interface", ["CONSOLE", "GUI", "WEB"])
 
 
 class View:
+  """Represents the view of the game, responsible for displaying the game state to the user."""
+
   state: Game_State
   INTERFACE: Interface
 
