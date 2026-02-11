@@ -1,28 +1,33 @@
 import logging
 
-from .view.view import Interface, View
+from src.state import Game_State
+
+from .view.console import ConsoleView
 
 
 def main(args: list[str] | None = None):
-  GUI: View
+  INTERFACE: ConsoleView | None
   if args is None:
     import sys
 
     args = sys.argv[1:]
   logging.basicConfig(level=logging.INFO, format="%(message)s")
   logging.debug("Arguments: %s", ", ".join(args))
+  state = Game_State()
   match args:
     case ["--cli"]:
-      GUI = View(Interface.CONSOLE)
+      INTERFACE = ConsoleView(state)
     case ["--gui"]:
-      GUI = View(Interface.GUI)
+      logging.error("GUI interface is not implemented yet.")
+      return 1
     case ["--web"]:
-      GUI = View(Interface.WEB)
+      logging.error("Web interface is not implemented yet.")
+      return 1
     case _:
       logging.error(f"Launch arguments are {'invalid' if len(args) else 'missing'}")
       logging.error("Please launch with '--cli', '--gui' or '--web'.")
       return 1
-  GUI.display()
+  INTERFACE.run()
 
 
 if __name__ == "__main__":
