@@ -20,7 +20,10 @@ class View:
   def display(self):
     match self.INTERFACE:
       case Interface.CONSOLE:
-        logging.info("Opening console interface...")
+        logging.debug("Opening console interface...")
         view = console.ConsoleView(self.state)
         view.run()
         return 0
+      case _:
+        logging.error(f"Interface {self.INTERFACE.name} is not implemented yet.")
+        return 1

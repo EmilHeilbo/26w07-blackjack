@@ -12,16 +12,15 @@ def main(args: list[str] | None = None):
   logging.basicConfig(level=logging.INFO, format="%(message)s")
   logging.debug("Arguments: %s", ", ".join(args))
   match args:
-    case ["--console"]:
-      logging.debug("Console mode")
+    case ["--cli"]:
       GUI = View(Interface.CONSOLE)
-
     case ["--gui"]:
-      logging.debug("GUI mode")
       GUI = View(Interface.GUI)
+    case ["--web"]:
+      GUI = View(Interface.WEB)
     case _:
       logging.error(f"Launch arguments are {'invalid' if len(args) else 'missing'}")
-      logging.error("Please launch with either '--console' or '--gui'")
+      logging.error("Please launch with '--cli', '--gui' or '--web'.")
       return 1
   GUI.display()
 
