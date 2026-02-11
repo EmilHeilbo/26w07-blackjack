@@ -1,4 +1,4 @@
-from src.logic import card, get_deck
+from src.logic import Card, get_deck
 
 
 def test_correct_deck_size():
@@ -18,6 +18,6 @@ def test_ensure_shuffle_works():
 
 
 def test_card_functions():
-  ACE_OF_SPADES = card(card.Suit(1), card.Rank(1))
+  ACE_OF_SPADES = Card(Card.Suit(1), Card.Rank(1))
   assert str(ACE_OF_SPADES) == "Ace of Spades"
-  assert repr(ACE_OF_SPADES) == "<class 'src.logic.card'>(1,1)"
+  assert repr(ACE_OF_SPADES) == "<class 'src.logic.Card'>(1,1)"

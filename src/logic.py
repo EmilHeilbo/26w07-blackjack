@@ -3,7 +3,7 @@ from enum import Enum
 from random import shuffle
 
 
-class card:
+class Card:
   # Separate value names from logic, to make future localization easier
   SUIT_NAMES = ["Spades", "Hearts", "Clubs", "Diamonds"]
   RANK_NAMES = [
@@ -45,8 +45,8 @@ class card:
     return int(self) == int(other)
 
 
-def get_deck(number_of_decks: int = 1, shuffle_deck: bool = True) -> list[card]:
-  BASE_DECK = [card(s, r) for r in card.Rank for s in card.Suit]
+def get_deck(number_of_decks: int = 1, shuffle_deck: bool = True) -> list[Card]:
+  BASE_DECK = [Card(s, r) for r in Card.Rank for s in Card.Suit]
   DECK = BASE_DECK * max(1, number_of_decks)
   if shuffle_deck:
     shuffle(DECK)
