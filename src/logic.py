@@ -4,6 +4,8 @@ from random import shuffle
 
 
 class Card:
+  """Represents a single card in the deck, with a suit and rank."""
+
   # Separate value names from logic, to make future localization easier
   SUIT_NAMES = ["Spades", "Hearts", "Clubs", "Diamonds"]
   RANK_NAMES = [
@@ -34,8 +36,8 @@ class Card:
   def __str__(self) -> str:
     return "%s of %s" % (self.rank.name, self.suit.name)
 
-  # Implement int conversion to simplify sorting
   def __int__(self) -> int:
+    """Implement int conversion to simplify sorting"""
     return self.suit.value + self.rank.value * 4
 
   def __lt__(self, other) -> bool:
@@ -46,6 +48,7 @@ class Card:
 
 
 def get_deck(number_of_decks: int = 1, shuffle_deck: bool = True) -> list[Card]:
+  """Generates a standard deck of 52 playing cards, with optional shuffling and multiple decks."""
   BASE_DECK = [Card(s, r) for r in Card.Rank for s in Card.Suit]
   DECK = BASE_DECK * max(1, number_of_decks)
   if shuffle_deck:
