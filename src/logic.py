@@ -36,7 +36,7 @@ class card:
 
   # Implement int conversion to simplify sorting
   def __int__(self) -> int:
-    return self.suit.value * 13 + self.rank.value
+    return self.suit.value + self.rank.value * 4
 
   def __lt__(self, other) -> bool:
     return int(self) < int(other)
@@ -46,7 +46,7 @@ class card:
 
 
 def get_deck(number_of_decks: int = 1, shuffle_deck: bool = True) -> list[card]:
-  BASE_DECK = [card(s, r) for s in card.Suit for r in card.Rank]
+  BASE_DECK = [card(s, r) for r in card.Rank for s in card.Suit]
   DECK = BASE_DECK * max(1, number_of_decks)
   if shuffle_deck:
     shuffle(DECK)
