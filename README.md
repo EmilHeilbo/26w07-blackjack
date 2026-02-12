@@ -28,3 +28,5 @@ python -m src --cli
 - Displaying cards so they are more clear than eg. ♠9
 - Online Multiplayer
   - OCI-container image
+
+Playing card assets are from [Google Code Archive](https://code.google.com/archive/p/vector-playing-cards/)

@@ -28,3 +28,5 @@ python -m src --cli
 - Fremvisning af kort så de er mere tydelige end eg. ♠9
 - Online Multiplayer
   - OCI-container image
+
+Spillekort assets stammer fra [Google Code Archive](https://code.google.com/archive/p/vector-playing-cards/)
