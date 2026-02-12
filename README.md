@@ -1,7 +1,7 @@
 # Blackjack
-Basalt blackjack spil implementeret i Python 3.
+Basic blackjack game implemented in Python 3
 
-For at køre spillet, brug `uv`:
+To run the game, use `uv`:
 ```sh
 uv venv
 source .venv/bin/activate
@@ -10,17 +10,17 @@ python -m src.main --cli
 ```
 
 ## Features
-- Blanding af kort
-- Uddeling af kort efter typisk Blackjack tilgang
-- Spiller-input m.h.t. hit/stand
-- Scoring af spillerens og dealerens hånd, win/lose logik
+- Shuffling cards
+- Dealing cards according to typical Blackjack approach
+- Player input for hit/stand
+- Scoring of player's and dealer's hand, win/lose logic
 
 ### "Nice-to-have"
-- Tracking af wins/losses
-- Valg af input I stedet for almindelig indtastning, eg. PyInquirer
-  - Mere detaljeret Terminal UI
-  - GUI vha. Tkinter eller PyQt
-  - WebUI vha. eg. Flask
-- Fremvisning af kort så de er mere tydelige end eg. ♠9
+- Tracking of wins/losses
+- Choice of input instead of regular input, e.g. PyInquirer
+  - More detailed Terminal UI
+  - GUI using Tkinter, PyQt or PyGObject
+  - WebUI using Flask
+- Displaying cards so they are more clear than eg. ♠9
 - Online Multiplayer
   - OCI-container image
