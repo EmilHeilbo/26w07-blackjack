@@ -6,7 +6,7 @@ To run the game, use `uv`:
 uv venv
 source .venv/bin/activate
 uv pip install -r pyproject.toml
-python -m src.main --cli
+python -m src --cli
 ```
 
 ## Features
