@@ -1,4 +1,5 @@
 import logging
+from time import sleep
 
 from ..state import Game_State
 
@@ -41,9 +42,11 @@ class ConsoleView(Game_State):
           logging.debug("Player stands.")
         case _:
           logging.info("Invalid input. Please enter 'h' or 's'.")
-      logging.debug("------------------")
+      logging.info("------------------")
+      sleep(1)
 
     self.state.close()
     self.state.DEALER.print_hand()
+    logging.info("------------------")
     WINNERS = self.state.determine_best_hands()
     logging.info(self.state.winning_hands_to_string(WINNERS))

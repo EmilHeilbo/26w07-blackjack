@@ -1,6 +1,7 @@
 """The current game state, eg. current deck, hands at play, etc."""
 
 import logging
+from time import sleep
 
 from .logic import Card, get_deck
 
@@ -68,6 +69,8 @@ class Game_State:
     """Closes the game by dealing cards to the dealer until they reach a score of 17 or higher."""
     while self.DEALER.score < 17:
       self.DEALER.hand.append(self.deck.pop())
+      logging.info(f"Dealer hits: {self.DEALER.hand[-1]}")
+      sleep(1)
 
   def determine_best_hands(self) -> list[Player]:
     """Determines the best hand(s) among the dealer and players, excluding any hands that have busted."""
