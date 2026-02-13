@@ -22,7 +22,7 @@ class Player:
   def update_score(self) -> None:
     """Updates the player's score based on their current hand."""
     self.score = 0
-    for _card in sorted(self.hand, reverse=True):
+    for _card in sorted(self.hand, key=lambda card: int(card), reverse=True):
       logging.debug(f"{self.score} before {_card}")
       match _card.rank.value:
         case n if n == 1:
@@ -83,8 +83,14 @@ class Game_State:
     WINNERS: list[Player] = [p for p in self.PLAYERS if p in players]
     for p in [self.DEALER, *self.PLAYERS]:
       logging.debug(f"Player {str(p.id)} score: {p.score}")
-    if len(WINNERS) == 0:
+    if len(WINNERS) == 0 and self.DEALER.score <= 21:
       return "House wins!"
-    if self.DEALER.score == WINNERS[0].score:
+    if (
+      (len(WINNERS) == 0 and self.DEALER.score > 21)
+      or self.DEALER.score == WINNERS[0].score
+      or len(WINNERS) > 1
+    ):
+      if len(WINNERS) == 0:
+        WINNERS = [p for p in self.PLAYERS]
       return f"Push, player {', '.join(str(p.id) for p in WINNERS)} splits!"
-    return f"Player {', '.join(str(p.id) for p in WINNERS)} wins!"
+    return f"Player {WINNERS[0].id} wins!"
