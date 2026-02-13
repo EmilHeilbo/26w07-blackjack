@@ -35,8 +35,10 @@ class Player:
       logging.debug(f"{self.score} after {_card}")
 
   def print_hand(self) -> None:
-    s = f"{str(self)} hand: {', '.join([str(c) for c in self.hand])}\n{str(self)} score: {self.score}"
-    logging.info(s)
+    logging.info(
+      f"{str(self).capitalize()} hand: {', '.join([str(c) for c in self.hand])}"
+    )
+    logging.info(f"  Score: {self.score}")
 
 
 class Game_State:
