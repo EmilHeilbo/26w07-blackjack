@@ -21,7 +21,6 @@ def test_win_condition():
     Card(Card.Suit(1), Card.Rank(1)),
     Card(Card.Suit(2), Card.Rank(10)),
   ]
-  GAME.DEALER.update_score()
   WINNERS = GAME.determine_best_hands()
   assert GAME.DEALER in WINNERS
   assert (
@@ -31,7 +30,6 @@ def test_win_condition():
     Card(Card.Suit(1), Card.Rank(1)),
     Card(Card.Suit(2), Card.Rank(10)),
   ]
-  GAME.PLAYERS[0].update_score()
   assert GAME.PLAYERS[0].score == 21
   GAME.PLAYERS[0].print_hand()
   WINNERS = GAME.determine_best_hands()
@@ -41,7 +39,6 @@ def test_win_condition():
     or "Push, player 1 splits!"
   )
   GAME.DEALER.hand[1].rank = Card.Rank(9)
-  GAME.DEALER.update_score()
   WINNERS = GAME.determine_best_hands()
   assert GAME.DEALER not in WINNERS
   WIN_STRING = GAME.winning_hands_to_string(WINNERS)
@@ -54,8 +51,6 @@ def test_player_state():
     Card(Card.Suit(1), Card.Rank(1)),
     Card(Card.Suit(2), Card.Rank(1)),
   ]
-  test_player.update_score()
   assert test_player.score == 12
   test_player.hand[1].rank = Card.Rank(10)
-  test_player.update_score()
   assert test_player.score == 21

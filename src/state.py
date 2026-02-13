@@ -10,29 +10,30 @@ class Player:
 
   id: int = 0
   hand: list[Card]
-  score: int
 
   def __init__(self, id: int) -> None:
     self.id = id
     self.hand = []
-    self.score = 0
 
   def __str__(self) -> str:
     return f"player {self.id}" if self.id else "house"
 
-  # TODO: Fix edge-case of having three Aces on hand
-  # TODO: Implement observer pattern
-  def update_score(self) -> None:
+  # TODO: Fix edge-case of having multiple Aces on hand on top of a 10-value card
+  @property
+  def score(self) -> int:
     """Updates the player's score based on their current hand."""
-    self.score = 0
-    for _card in sorted(self.hand, key=lambda card: int(card), reverse=True):
-      logging.debug(f"{self.score} before {_card}")
+    score = 0
+    for i, _card in enumerate(
+      sorted(self.hand, key=lambda card: int(card), reverse=True)
+    ):
+      logging.debug(f"{score} before {_card}")
       match _card.rank.value:
         case n if n == 1:
-          self.score += 11 if self.score <= 10 else 1
+          score += 11 if score <= 10 else 1
         case n:
-          self.score += min(max(n, 1), 10)
-      logging.debug(f"{self.score} after {_card}")
+          score += min(max(n, 1), 10)
+      logging.debug(f"{score} after {_card}")
+    return score
 
   def print_hand(self) -> None:
     logging.info(
@@ -59,19 +60,15 @@ class Game_State:
     for _ in range(2):
       for p in self.PLAYERS:
         p.hand.append(self.deck.pop())
-    for p in [self.DEALER, *self.PLAYERS]:
-      p.update_score()
 
   def hit(self, player: Player) -> None:
     """Deals a card to the specified player and updates their score."""
     player.hand.append(self.deck.pop())
-    player.update_score()
 
   def close(self) -> None:
     """Closes the game by dealing cards to the dealer until they reach a score of 17 or higher."""
     while self.DEALER.score < 17:
       self.DEALER.hand.append(self.deck.pop())
-      self.DEALER.update_score()
 
   def determine_best_hands(self) -> list[Player]:
     """Determines the best hand(s) among the dealer and players, excluding any hands that have busted."""
