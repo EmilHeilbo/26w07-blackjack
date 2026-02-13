@@ -1,16 +1,12 @@
 import logging
+from sys import argv
 
-from src.state import Game_State
-
+from .state import Game_State
 from .view.console import ConsoleView
 
 
-def main(args: list[str] | None = None):
+def main(args: list[str] = []):
   INTERFACE: ConsoleView | None
-  if args is None:
-    import sys
-
-    args = sys.argv[1:]
   logging.basicConfig(level=logging.INFO, format="%(message)s")
   logging.debug("Arguments: %s", ", ".join(args))
   state = Game_State()
@@ -31,4 +27,4 @@ def main(args: list[str] | None = None):
 
 
 if __name__ == "__main__":
-  main()
+  main(argv[1:])
