@@ -17,6 +17,9 @@ class Player:
     self.hand = []
     self.score = 0
 
+  def __str__(self) -> str:
+    return f"player {self.id}" if self.id else "house"
+
   # TODO: Fix edge-case of having three Aces on hand
   # TODO: Implement observer pattern
   def update_score(self) -> None:
@@ -32,8 +35,7 @@ class Player:
       logging.debug(f"{self.score} after {_card}")
 
   def print_hand(self) -> None:
-    name = "Dealer" if self.id == 0 else f"Player {self.id}"
-    s = f"{name} hand: {', '.join([str(c) for c in self.hand])}\n{name} score: {self.score}"
+    s = f"{str(self)} hand: {', '.join([str(c) for c in self.hand])}\n{str(self)} score: {self.score}"
     logging.info(s)
 
 
@@ -80,17 +82,9 @@ class Game_State:
 
   def winning_hands_to_string(self, players: list[Player]) -> str:
     """Converts the winning hand(s) to a string for display."""
-    WINNERS: list[Player] = [p for p in self.PLAYERS if p in players]
     for p in [self.DEALER, *self.PLAYERS]:
       logging.debug(f"Player {str(p.id)} score: {p.score}")
-    if len(WINNERS) == 0 and self.DEALER.score <= 21:
-      return "House wins!"
-    if (
-      (len(WINNERS) == 0 and self.DEALER.score > 21)
-      or self.DEALER.score == WINNERS[0].score
-      or len(WINNERS) > 1
-    ):
-      if len(WINNERS) == 0:
-        WINNERS = [p for p in self.PLAYERS]
-      return f"Push, player {', '.join(str(p.id) for p in WINNERS)} splits!"
-    return f"Player {WINNERS[0].id} wins!"
+    if len(players) == 1:
+      return "%s wins!" % str(players[0]).capitalize()
+    WINNERS = players if len(players) > 0 else [self.DEALER, *self.PLAYERS]
+    return f"Push, player {', '.join(str(p.id) for p in WINNERS)} splits!"
