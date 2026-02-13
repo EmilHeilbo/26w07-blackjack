@@ -9,6 +9,10 @@ uv pip install -r pyproject.toml
 python -m src --cli
 ```
 
+## Demo
+
+![Demo recording](./assets/demo.gif)
+
 ## Features
 - Shuffling cards
 - Dealing cards according to typical Blackjack approach

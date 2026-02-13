@@ -9,6 +9,10 @@ uv pip install -r pyproject.toml
 python -m src --cli
 ```
 
+## Demo
+
+![Demo-optagelse](./assets/demo.gif)
+
 ## Features
 - Blanding af kort
 - Uddeling af kort efter typisk Blackjack tilgang
