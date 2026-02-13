@@ -18,7 +18,6 @@ class Player:
   def __str__(self) -> str:
     return f"player {self.id}" if self.id else "house"
 
-  # TODO: Fix edge-case of having multiple Aces on hand on top of a 10-value card
   @property
   def score(self) -> int:
     """Updates the player's score based on their current hand."""
@@ -29,7 +28,7 @@ class Player:
       logging.debug(f"{score} before {_card}")
       match _card.rank.value:
         case n if n == 1:
-          score += 11 if score <= 10 else 1
+          score += 11 if score + len(self.hand[i + 1 :]) <= 10 else 1
         case n:
           score += min(max(n, 1), 10)
       logging.debug(f"{score} after {_card}")
