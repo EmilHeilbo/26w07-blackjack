@@ -1,13 +1,13 @@
 import logging
 from time import sleep
 
-from ..state import Game_State
+from ..state import State
 
 
-class ConsoleView(Game_State):
+class ConsoleView(State):
   """Implements the console interface for the Blackjack game."""
 
-  STATE: Game_State
+  STATE: State
 
   def __init__(self, state):
     self.state = state
@@ -23,7 +23,7 @@ class ConsoleView(Game_State):
       - The game stands automatically when the player's score is 21 or higher.
 
       ------------------
-    """
+    """.strip()
     logging.info(_intro_text)
     self.state.deal_cards()
     for p in [self.state.DEALER, *self.state.PLAYERS]:

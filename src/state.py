@@ -1,56 +1,35 @@
 """The current game state, eg. current deck, hands at play, etc."""
 
 import logging
+from random import shuffle
 from time import sleep
+from uuid import UUID, uuid4
 
-from .logic import Card, get_deck
-
-
-class Player:
-  """Represents a player in the game, including the dealer."""
-
-  id: int = 0
-  hand: list[Card]
-
-  def __init__(self, id: int) -> None:
-    self.id = id
-    self.hand = []
-
-  def __str__(self) -> str:
-    return f"player {self.id}" if self.id else "house"
-
-  @property
-  def score(self) -> int:
-    """Updates the player's score based on their current hand."""
-    score = 0
-    for i, _card in enumerate(
-      sorted(self.hand, key=lambda card: int(card), reverse=True)
-    ):
-      logging.debug(f"{score} before {_card}")
-      match _card.rank.value:
-        case n if n == 1:
-          score += 11 if score + len(self.hand[i + 1 :]) <= 10 else 1
-        case n:
-          score += min(max(n, 1), 10)
-      logging.debug(f"{score} after {_card}")
-    return score
-
-  def print_hand(self) -> None:
-    logging.info(
-      f"{str(self).capitalize()} hand: {', '.join([str(c) for c in self.hand])}"
-    )
-    logging.info(f"  Score: {self.score}")
+from .card import Card
+from .player import Player
 
 
-class Game_State:
+class State:
   """Represents the current state of the game, including the deck, players, and dealer."""
 
-  deck: list[Card] = []
+  ID: UUID
   DEALER: Player
   PLAYERS: list[Player]
+  NUMBER_OF_DECKS: int
+  deck: list[Card] = []
 
-  def __init__(self, player_count: int = 1) -> None:
-    self.deck = get_deck(number_of_decks=6)
+  def get_deck(self, shuffle_deck: bool = True) -> list[Card]:
+    """Generates a standard deck of 52 playing cards, with optional shuffling and multiple decks."""
+    BASE_DECK = [Card(s, r) for r in Card.Rank for s in Card.Suit]
+    DECK = BASE_DECK * max(1, self.NUMBER_OF_DECKS)
+    if shuffle_deck:
+      shuffle(DECK)
+    return DECK
+
+  def __init__(self, player_count: int = 1, deck_count: int = 6) -> None:
+    self.ID = uuid4()
+    self.NUMBER_OF_DECKS = deck_count
+    self.deck = self.get_deck()
     self.DEALER = Player(0)
     self.PLAYERS = [Player(i) for i in range(1, player_count + 1)]
 

@@ -1,9 +1,9 @@
-from src.logic import Card
-from src.state import Game_State, Player
+from src.card import Card
+from src.state import State
 
 
 def test_game_state():
-  GAME = Game_State()
+  GAME = State()
   GAME.deal_cards()
   assert len(GAME.DEALER.hand) == 1
   for p in GAME.PLAYERS:
@@ -16,7 +16,7 @@ def test_game_state():
 
 
 def test_win_condition():
-  GAME = Game_State()
+  GAME = State()
   GAME.DEALER.hand = [
     Card(Card.Suit(1), Card.Rank(1)),
     Card(Card.Suit(2), Card.Rank(10)),
@@ -43,14 +43,3 @@ def test_win_condition():
   assert GAME.DEALER not in WINNERS
   WIN_STRING = GAME.winning_hands_to_string(WINNERS)
   assert WIN_STRING in ["Push, Player 1 splits!", "Player 1 wins!"]
-
-
-def test_player_state():
-  test_player = Player(10)
-  test_player.hand = [
-    Card(Card.Suit(1), Card.Rank(1)),
-    Card(Card.Suit(2), Card.Rank(1)),
-  ]
-  assert test_player.score == 12
-  test_player.hand[1].rank = Card.Rank(10)
-  assert test_player.score == 21

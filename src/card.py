@@ -1,6 +1,5 @@
 # Here's where all the game logic resides; win-conditions, max dealer score, etc.
 from enum import Enum
-from random import shuffle
 
 
 class Card:
@@ -45,12 +44,3 @@ class Card:
 
   def __eq__(self, other) -> bool:
     return int(self) == int(other)
-
-
-def get_deck(number_of_decks: int = 1, shuffle_deck: bool = True) -> list[Card]:
-  """Generates a standard deck of 52 playing cards, with optional shuffling and multiple decks."""
-  BASE_DECK = [Card(s, r) for r in Card.Rank for s in Card.Suit]
-  DECK = BASE_DECK * max(1, number_of_decks)
-  if shuffle_deck:
-    shuffle(DECK)
-  return DECK
