@@ -1,5 +1,5 @@
 # Blackjack
-Basalt blackjack spil implementeret i Python 3.
+Basalt blackjack spil implementeret i Python 3
 
 For at køre spillet, brug `uv`:
 ```sh
@@ -11,11 +11,7 @@ python -m src --cli
 
 ## Demo
 
-<<<<<<< HEAD
-![[demo.gif]]
-=======
 ![Demo-optagelse](./assets/demo.gif)
->>>>>>> main
 
 ## Features
 - Blanding af kort

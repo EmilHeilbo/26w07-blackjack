@@ -11,11 +11,7 @@ python -m src --cli
 
 ## Demo
 
-<<<<<<< HEAD
-![[demo.gif]]
-=======
 ![Demo recording](./assets/demo.gif)
->>>>>>> main
 
 ## Features
 - Shuffling cards
