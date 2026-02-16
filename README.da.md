@@ -20,12 +20,13 @@ python -m src --cli
 - Scoring af spillerens og dealerens hånd, win/lose logik
 
 ### "Nice-to-have"
+- Staking / betting system
 - Tracking af wins/losses
-- Valg af input I stedet for almindelig indtastning, eg. PyInquirer
-  - Mere detaljeret Terminal UI
-  - GUI vha. Tkinter, PyQt, eller PyGObject
-  - WebUI vha. eg. Flask
-- Fremvisning af kort så de er mere tydelige end eg. ♠9
+- Valg af input I stedet for almindelig indtastning
+  - Mere detaljeret Terminal brugergrænseflade
+  - Grafisk brugergrænseflade
+  - WebUI
+- Mere tydelig fremvisning af kort 
 - Online Multiplayer
   - OCI-container image
 
