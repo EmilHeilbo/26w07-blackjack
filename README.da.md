@@ -11,7 +11,11 @@ python -m src --cli
 
 ## Demo
 
+<<<<<<< HEAD
 ![[demo.gif]]
+=======
+![Demo-optagelse](./assets/demo.gif)
+>>>>>>> main
 
 ## Features
 - Blanding af kort
