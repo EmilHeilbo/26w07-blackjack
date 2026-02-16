@@ -1,7 +1,7 @@
 import logging
 
-from src.card import Card
-from src.state import State
+from backend.card import Card
+from backend.state import State
 
 
 def test_correct_deck_size():
@@ -15,7 +15,7 @@ def test_correct_deck_size():
 def test_ensure_shuffle_works():
   DECK = State(deck_count=1).get_deck()
   UNSHUFFLED_DECK = State(deck_count=1).get_deck(shuffle_deck=False)
-  logging.info("The top card is the ", DECK[-1])
+  logging.info("The top card is the %s", DECK[-1])
   assert DECK != UNSHUFFLED_DECK
   assert sorted(DECK) == UNSHUFFLED_DECK
 
@@ -23,4 +23,4 @@ def test_ensure_shuffle_works():
 def test_card_functions():
   ACE_OF_SPADES = Card(Card.Suit(1), Card.Rank(1))
   assert str(ACE_OF_SPADES) == "Ace of Spades"
-  assert repr(ACE_OF_SPADES) == "<class 'src.card.Card'>(1,1)"
+  assert repr(ACE_OF_SPADES) == "<class 'backend.card.Card'>(1,1)"

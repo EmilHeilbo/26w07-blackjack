@@ -34,20 +34,25 @@ wheels = [
 
 [[package]]
 name = "blackjack"
-version = "0.1.1"
-source = { virtual = "." }
-dependencies = [
+version = "2026.2.1"
+source = { editable = "." }
+
+[package.optional-dependencies]
+dev = [
     { name = "coverage" },
-    { name = "fastapi" },
     { name = "pytest" },
+]
+web = [
+    { name = "fastapi" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "coverage", specifier = ">=7.13.4" },
-    { name = "fastapi", specifier = ">=0.128.8" },
-    { name = "pytest", specifier = ">=9.0.2" },
+    { name = "coverage", marker = "extra == 'dev'", specifier = ">=7.13.4" },
+    { name = "fastapi", marker = "extra == 'web'", specifier = ">=0.128.8" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.0.2" },
 ]
+provides-extras = ["dev", "web"]
 
 [[package]]
 name = "colorama"

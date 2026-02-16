@@ -1,5 +1,5 @@
-from src.card import Card
-from src.state import State
+from backend.card import Card
+from backend.state import State
 
 
 def test_game_state():

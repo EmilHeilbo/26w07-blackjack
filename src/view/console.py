@@ -1,7 +1,7 @@
 import logging
 from time import sleep
 
-from ..state import State
+from backend.state import State
 
 
 class ConsoleView(State):
