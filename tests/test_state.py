@@ -1,11 +1,15 @@
-from uuid import uuid4
+from uuid import UUID
 
-from backend.card import Card
 from backend.state import State
+
+# Assign UUID to ensure dealer plays
+PLAYER_WIN_ID = UUID("cb548291-a4c2-4786-ac1a-33e293ddcd0e")
+HOUSE_WIN_ID = UUID("6a5e0e4e-2285-4ce2-bdab-26298c14498c")
+PUSH_ID = UUID("2dde7f9a-c0eb-4521-9b37-249f9ffef326")
 
 
 def test_game_state():
-  GAME = State(uuid4())
+  GAME = State(PLAYER_WIN_ID)
   GAME.deal_cards()
   assert len(GAME.dealer.hand) == 1
   for p in GAME.players:
@@ -15,28 +19,26 @@ def test_game_state():
   assert GAME.players[0].score != 0
   GAME.close()
   assert GAME.dealer.score >= 17
-
-
-def test_win_condition():
-  GAME = State(uuid4())
-  GAME.dealer.hand = [
-    Card(Card.Suit(1), Card.Rank(1)),
-    Card(Card.Suit(2), Card.Rank(10)),
-  ]
-  assert GAME.dealer in GAME.top_players
-  assert "Dealer wins!" == GAME.winning_hands_to_string() or "Push, dealer splits!"
-  GAME.players[0].hand = [
-    Card(Card.Suit(1), Card.Rank(1)),
-    Card(Card.Suit(2), Card.Rank(10)),
-  ]
-  assert GAME.players[0].score == 21
-  GAME.players[0].print_hand()
-  assert GAME.players[0] in GAME.top_players
-  assert (
-    "Push, player 1 splits!" == GAME.winning_hands_to_string()
-    or "Push, player 1 splits!"
-  )
-  GAME.dealer.hand[1].rank = Card.Rank(9)
   assert GAME.dealer not in GAME.top_players
-  WIN_STRING = GAME.winning_hands_to_string()
-  assert WIN_STRING in ["Push, Player 1 splits!", "Player 1 wins!"]
+  assert GAME.winning_hands_to_string() == "Player 1 wins!"
+
+
+def test_house_win():
+  GAME = State(HOUSE_WIN_ID)
+  GAME.deal_cards()
+  while GAME.players[0].score < 17:
+    GAME.hit(GAME.players[0])
+  GAME.close()
+  assert GAME.dealer in GAME.top_players
+  assert GAME.winning_hands_to_string() == "House wins!"
+
+
+def test_push():
+  GAME = State(PUSH_ID)
+  GAME.deal_cards()
+  while GAME.players[0].score < 17:
+    GAME.hit(GAME.players[0])
+  GAME.close()
+  GAME.players[0].print_hand()
+  assert [GAME.dealer, *GAME.players] == GAME.top_players
+  assert GAME.winning_hands_to_string() == "Push, house, player 1 splits!"
