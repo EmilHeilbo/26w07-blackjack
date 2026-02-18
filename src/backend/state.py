@@ -1,7 +1,7 @@
 """The current game state, eg. current deck, hands at play, etc."""
 
 import logging
-from random import shuffle
+from random import seed, shuffle
 from time import sleep
 from typing import final
 from uuid import UUID
@@ -31,6 +31,7 @@ class State:
   def __init__(self, id: UUID, player_count: int = 1, deck_count: int = 6) -> None:
     self.id = id
     self.number_of_decks = deck_count
+    seed(str(id))
     self.deck = self.get_deck()
     self.dealer = Player(0, self.id)
     self.players = [Player(i, self.id) for i in range(1, player_count + 1)]
