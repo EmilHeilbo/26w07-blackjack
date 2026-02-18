@@ -6,8 +6,6 @@ from .console import ConsoleView
 
 def main(args: list[str]):
   LAUNCH_ARGS = ["--cli", "--gui", "--web"]
-  interface: ConsoleView | None
-
   logging.basicConfig(level=logging.INFO, format="%(message)s")
   logging.debug("Arguments: %s", ", ".join(args))
   _matches = 0
@@ -19,8 +17,10 @@ def main(args: list[str]):
     logging.error("Please launch with only one of '--cli', '--gui' or '--web'.")
     exit(1)
   match args:
-    case _ if LAUNCH_ARGS[0] in args:
-      interface = ConsoleView()
+    case _ if LAUNCH_ARGS[0] in args or len(args) == 0:
+      if len(args) == 0:
+        logging.info("No launch arguments found, assuming '--cli' was intended.")
+      ConsoleView().run()
     case _ if LAUNCH_ARGS[1] in args:
       logging.error("GUI interface is not implemented yet.")
       exit(1)
@@ -31,8 +31,6 @@ def main(args: list[str]):
       logging.error(f"Launch arguments are {'invalid' if len(args) else 'missing'}")
       logging.error("Please launch with '--cli', '--gui' or '--web'.")
       exit(1)
-  interface.run()
-  exit(0)
 
 
 if __name__ == "__main__":
