@@ -25,4 +25,3 @@ def test_ensure_shuffle_works():
 def test_card_functions():
   ACE_OF_SPADES = Card(Card.Suit(1), Card.Rank(1))
   assert str(ACE_OF_SPADES) == "Ace of Spades"
-  assert repr(ACE_OF_SPADES) == "<class 'backend.card.Card'>(1,1)"

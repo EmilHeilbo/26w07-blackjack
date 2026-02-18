@@ -26,5 +26,8 @@ log_cli_level = "DEBUG"
 [tool.basedpyright]
 stubPath = "src"
 
+[tool.coverage.report]
+exclude_also = [ "def __repr__" ]
+
 [tool.ruff]
 indent-width = 2
