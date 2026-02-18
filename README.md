@@ -1,12 +1,12 @@
 # Blackjack
-Basic blackjack game implemented in Python 3
+A game of blackjack implemented in Python 3
 
 To run the game, use `uv`:
 ```sh
 uv venv
 source .venv/bin/activate
 uv pip install -r pyproject.toml
-python -m src --cli
+python -m view --cli
 ```
 
 ## Demo

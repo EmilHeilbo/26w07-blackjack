@@ -1,18 +1,24 @@
 import logging
+from typing import final, override
+from uuid import UUID
 
-from .state import Card
+from .card import Card
 
 
+@final
 class Player:
   """Represents a player in the game, including the dealer."""
 
   id: int = 0
   hand: list[Card]
+  game_id: UUID
 
-  def __init__(self, id: int) -> None:
+  def __init__(self, id: int, game_id: UUID) -> None:
     self.id = id
     self.hand = []
+    self.game_id = game_id
 
+  @override
   def __str__(self) -> str:
     return f"player {self.id}" if self.id else "house"
 

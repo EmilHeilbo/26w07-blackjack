@@ -1,12 +1,12 @@
 # Blackjack
-Basalt blackjack spil implementeret i Python 3
+Et blackjack spil implementeret i Python 3
 
 For at køre spillet, brug `uv`:
 ```sh
 uv venv
 source .venv/bin/activate
 uv pip install -r pyproject.toml
-python -m src --cli
+python -m view --cli
 ```
 
 ## Demo

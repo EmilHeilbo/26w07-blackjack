@@ -23,5 +23,8 @@ addopts = ["--import-mode=importlib"]
 log_cli = true
 log_cli_level = "DEBUG"
 
+[tool.basedpyright]
+stubPath = "src"
+
 [tool.ruff]
 indent-width = 2

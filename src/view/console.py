@@ -1,16 +1,16 @@
 import logging
 from time import sleep
+from typing import final
+from uuid import uuid4
 
 from backend.state import State
 
 
-class ConsoleView(State):
+@final
+class ConsoleView:
   """Implements the console interface for the Blackjack game."""
 
-  STATE: State
-
-  def __init__(self, state):
-    self.state = state
+  state = State(uuid4())
 
   def run(self):
     """Runs the console interface for the Blackjack game."""
@@ -26,18 +26,22 @@ class ConsoleView(State):
     """.strip()
     logging.info(_intro_text)
     self.state.deal_cards()
-    for p in [self.state.DEALER, *self.state.PLAYERS]:
+    for p in [self.state.dealer, *self.state.players]:
       p.print_hand()
       logging.info("------------------")
+    self.state.hit(self.state.dealer)
 
     _input = None
-    while _input != "s" and self.state.PLAYERS[0].score < 21:
+    while _input != "s" and self.state.players[0].score < 21:
       _input = input("Enter 'h' to hit or 's' to stand: ")
       match _input:
         case "h":
           logging.debug("Player hits.")
-          self.state.hit(self.state.PLAYERS[0])
-          self.state.PLAYERS[0].print_hand()
+          self.state.hit(self.state.players[0])
+          if self.state.players[0].score == 21:
+            logging.info(f"{str(self.state.players[0]).capitalize()} has blackjack!")
+          else:
+            self.state.players[0].print_hand()
         case "s":
           logging.debug("Player stands.")
         case _:
@@ -46,7 +50,6 @@ class ConsoleView(State):
       sleep(1)
 
     self.state.close()
-    self.state.DEALER.print_hand()
+    self.state.dealer.print_hand()
     logging.info("------------------")
-    WINNERS = self.state.determine_best_hands()
-    logging.info(self.state.winning_hands_to_string(WINNERS))
+    logging.info(self.state.winning_hands_to_string())

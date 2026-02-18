@@ -1,9 +1,11 @@
+from uuid import uuid4
+
 from backend.card import Card
 from backend.player import Player
 
 
 def test_player_state():
-  test_player = Player(10)
+  test_player = Player(10, uuid4())
   test_player.hand = [
     Card(Card.Suit(1), Card.Rank(1)),
     Card(Card.Suit(2), Card.Rank(1)),

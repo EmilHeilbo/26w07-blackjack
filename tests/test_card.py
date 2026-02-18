@@ -1,4 +1,5 @@
 import logging
+from uuid import uuid4
 
 from backend.card import Card
 from backend.state import State
@@ -9,15 +10,16 @@ def test_correct_deck_size():
     # Correct for not including end of range, starting at 0
     COUNT = n + 1
     EXPECTED_DECK_SIZE = 52
-    assert len(State(deck_count=COUNT).get_deck()) == EXPECTED_DECK_SIZE * COUNT
+    assert (
+      len(State(uuid4(), deck_count=COUNT).get_deck()) == EXPECTED_DECK_SIZE * COUNT
+    )
 
 
 def test_ensure_shuffle_works():
-  DECK = State(deck_count=1).get_deck()
-  UNSHUFFLED_DECK = State(deck_count=1).get_deck(shuffle_deck=False)
-  logging.info("The top card is the %s", DECK[-1])
-  assert DECK != UNSHUFFLED_DECK
-  assert sorted(DECK) == UNSHUFFLED_DECK
+  STATE = State(uuid4(), deck_count=1)
+  logging.info("The top card is the %s", STATE.deck[-1])
+  assert STATE.deck != sorted(STATE.deck)
+  assert sorted(STATE.deck) == STATE.get_deck(shuffle_deck=False)
 
 
 def test_card_functions():
