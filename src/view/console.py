@@ -26,22 +26,22 @@ class ConsoleView:
     """.strip()
     logging.info(_intro_text)
     self.state.deal_cards()
-    for p in [self.state.dealer, *self.state.players]:
+    for p in [self.state.DEALER, *self.state.PLAYERS]:
       p.print_hand()
       logging.info("------------------")
-    self.state.hit(self.state.dealer)
+    self.state.hit(self.state.DEALER)
 
     _input = None
-    while _input != "s" and self.state.players[0].score < 21:
+    while _input != "s" and self.state.PLAYERS[0].score < 21:
       _input = input("Enter 'h' to hit or 's' to stand: ")
       match _input:
         case "h":
           logging.debug("Player hits.")
-          self.state.hit(self.state.players[0])
-          if self.state.players[0].score == 21:
-            logging.info(f"{str(self.state.players[0]).capitalize()} has blackjack!")
+          self.state.hit(self.state.PLAYERS[0])
+          if self.state.PLAYERS[0].score == 21:
+            logging.info(f"{str(self.state.PLAYERS[0]).capitalize()} has blackjack!")
           else:
-            self.state.players[0].print_hand()
+            self.state.PLAYERS[0].print_hand()
         case "s":
           logging.debug("Player stands.")
         case _:
@@ -50,6 +50,6 @@ class ConsoleView:
       sleep(1)
 
     self.state.close()
-    self.state.dealer.print_hand()
+    self.state.DEALER.print_hand()
     logging.info("------------------")
     logging.info(self.state.winning_hands_to_string())
