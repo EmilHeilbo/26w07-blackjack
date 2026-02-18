@@ -15,8 +15,8 @@ class ConsoleView:
   def run(self):
     """Runs the console interface for the Blackjack game."""
     _intro_text = """
-    Welcome to Blackjack!
-    Rules:
+      Welcome to Blackjack!
+      Rules:
       - The goal is to get as close to 21 as possible without going over.
       - You can hit (take another card) or stand (keep your current hand).
       - The dealer hits until they reach 17 or higher.
