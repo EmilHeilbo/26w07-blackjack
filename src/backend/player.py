@@ -29,7 +29,6 @@ class Player:
     for i, _card in enumerate(
       sorted(self.hand, key=lambda card: int(card), reverse=True)
     ):
-      logging.debug(f"{score} before {_card}")
       match _card.rank.value:
         case n if n == 1:
           score += 11 if score + len(self.hand[i + 1 :]) <= 10 else 1

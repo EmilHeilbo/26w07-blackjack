@@ -2,6 +2,7 @@
 
 import logging
 from random import seed, shuffle
+from sys import modules
 from time import sleep
 from typing import final
 from uuid import UUID
@@ -53,7 +54,8 @@ class State:
       while self.dealer.score < 17:
         self.hit(self.dealer)
         logging.info(f"Dealer hits: {self.dealer.hand[-1]}")
-        sleep(1)
+        if "view.console" in modules:  # pragma: no cover
+          sleep(1)
 
   @property
   def top_players(self) -> list[Player]:
