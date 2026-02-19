@@ -1,7 +1,7 @@
 from uuid import uuid4
 
-from backend.card import Card
-from backend.player import Player
+from blackjack.backend.card import Card
+from blackjack.backend.player import Player
 
 
 def test_player_state():

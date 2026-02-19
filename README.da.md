@@ -3,9 +3,7 @@ Et blackjack spil implementeret i Python 3
 
 For at køre spillet, brug `uv`:
 ```sh
-uv venv
-source .venv/bin/activate
-uv pip install -r pyproject.toml
+uv sync --no-dev
 uv run -m view --cli
 ```
 

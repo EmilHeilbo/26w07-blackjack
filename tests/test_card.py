@@ -1,8 +1,8 @@
 import logging
 from uuid import uuid4
 
-from backend.card import Card
-from backend.state import State
+from blackjack.backend.card import Card
+from blackjack.backend.state import State
 
 
 def test_correct_deck_size():

@@ -3,7 +3,7 @@ from time import sleep
 from typing import final
 from uuid import uuid4
 
-from backend.state import State
+from ..backend.state import State
 
 
 @final

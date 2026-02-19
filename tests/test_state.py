@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from backend.state import State
+from blackjack.backend.state import State
 
 # Assign UUID to ensure dealer plays
 PLAYER_WIN_ID = UUID("cb548291-a4c2-4786-ac1a-33e293ddcd0e")

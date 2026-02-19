@@ -3,7 +3,7 @@
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
 
-app = FastAPI()
+api = FastAPI()
 
 html = """
 <!DOCTYPE html>
@@ -40,12 +40,12 @@ html = """
 """
 
 
-@app.get("/")
+@api.get("/")
 async def get():
   return HTMLResponse(html)
 
 
-@app.websocket("/ws")
+@api.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
   await websocket.accept()
   while True:

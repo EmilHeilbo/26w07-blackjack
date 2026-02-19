@@ -3,10 +3,8 @@ A game of blackjack implemented in Python 3
 
 To run the game, use `uv`:
 ```sh
-uv venv
-source .venv/bin/activate
-uv pip install -r pyproject.toml
-uv run -m view --cli
+uv sync --no-dev
+uv run -m blackjack
 ```
 
 ## Demo
