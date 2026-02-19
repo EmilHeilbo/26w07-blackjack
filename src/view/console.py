@@ -48,7 +48,7 @@ class ConsoleView:
           logging.info("Invalid input. Please enter 'h' or 's'.")
       logging.info("------------------")
       sleep(1)
-
+    self.state.DEALER.print_hand()
     self.state.close()
     self.state.DEALER.print_hand()
     logging.info("------------------")
