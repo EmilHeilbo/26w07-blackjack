@@ -1,0 +1,7 @@
+__pycache__/
+*.egg-info/
+.*/
+tests/
+build/
+dist/
+coverage/
