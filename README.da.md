@@ -6,7 +6,7 @@ For at køre spillet, brug `uv`:
 uv venv
 source .venv/bin/activate
 uv pip install -r pyproject.toml
-python -m view --cli
+uv run -m view --cli
 ```
 
 ## Demo
