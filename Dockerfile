@@ -10,4 +10,4 @@ COPY . .
 RUN uv build
 
 EXPOSE 8000
-ENTRYPOINT [ "uv", "run", "fastapi", "run", "/app/src/blackjack/api.py" ]
+ENTRYPOINT [ "uv", "run", "-m", "blackjack.view", "--web" ]

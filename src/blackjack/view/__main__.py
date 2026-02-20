@@ -25,8 +25,15 @@ def main(args: list[str]):
       logging.error("GUI interface is not implemented yet.")
       exit(1)
     case _ if LAUNCH_ARGS[2] in args:
-      logging.error("Web interface is not implemented yet.")
-      exit(1)
+      import uvicorn
+
+      logging.info("Launching web interface...")
+      uvicorn.run(
+        "blackjack.backend.api:API",
+        host="0.0.0.0",
+        port=8000,
+        reload=True,
+      )
     case _:
       logging.error(f"Launch arguments are {'invalid' if len(args) else 'missing'}")
       logging.error("Please launch with '--cli', '--gui' or '--web'.")
